@@ -1,0 +1,19 @@
+{
+  "name": "interceptor-repro",
+  "version": "0.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">= 20.9 < 21"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.9",
+    "typescript": "^5.3.3"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "axios": "^1.6.7",
+    "axios-cache-interceptor": "^1.5.1"
+  }
+}
