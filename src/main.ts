@@ -1,7 +1,17 @@
-import Axios from 'axios';
-import { setupCache } from 'axios-cache-interceptor';
+import axios from 'axios';
+import { buildMemoryStorage, setupCache } from 'axios-cache-interceptor';
 
-const instance = Axios.create();
-const axios = setupCache(instance);
+const requestInterceptor = async (config: axios.InternalAxiosRequestConfig) => {
+    if (!axiosInstance.defaults.headers.Authorization) {
+      console.log("Missing auth")
+    }
+    return config;
+  };
 
-axios.get('/')
+const plainAxiosInstance = axios.create();
+const axiosInstance = setupCache(plainAxiosInstance, {
+    storage: buildMemoryStorage(false, 60, false),
+    headerInterpreter: () => 60,
+  });
+
+axiosInstance.interceptors.request.use(requestInterceptor);
